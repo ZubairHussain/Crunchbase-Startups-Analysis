@@ -13,8 +13,9 @@ Analysis Dependencies:
 UI Dependencies:
 
 1) Nodejs
+2) npm
 
-Node Modules:
+Node Modules (cd _dirto/WebApp):
 1) Express (npm install express)
 2) Express-myconnection (npm install express-myconnection)
 3) body-parser (npm install body-parser)
