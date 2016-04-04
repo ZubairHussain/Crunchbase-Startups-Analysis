@@ -1,0 +1,8 @@
+
+/*
+ * GET home page.
+ */
+
+exports.index = function(req, res){
+  res.render('index', { total_visits='100', identical_users='200', unique_devices='300', operating_systems='400'});
+};
