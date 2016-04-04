@@ -27,7 +27,11 @@ Node Modules (cd _dirto/WebApp):
 9) csv-parse (npm install csv-parse)
 10) http (npm install http)
 11) path (npm install path)
+12) connect (npm install connect)
 
 => server will run by
 	-> cmd = node/nodejs app.js
 	-> browser = localhost:4300
+
+
+=> If unable to run web application, see screenshots folder
