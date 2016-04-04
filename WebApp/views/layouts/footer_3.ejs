@@ -1,0 +1,133 @@
+
+<!-- footer content -->
+                        <footer>
+                            <div class="">
+                                <p class="pull-right">
+                                    <span class="lead"> <i class="fa fa-users"></i> Startup Trends</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                    <!-- /footer content -->
+                </div>
+
+
+</div>
+    </div>
+
+    <!-- page end -->
+        <div id="custom_notifications" class="custom-notifications dsp_none">
+            <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+            </ul>
+            <div class="clearfix"></div>
+            <div id="notif-group" class="tabbed_notifications"></div>
+        </div>
+    <!-- /page end -->
+
+    <!-- JAVASCRIPTS -->
+        
+        <!-- bootstrap -->
+            <script src="/../js/bootstrap.min.js"></script>
+
+        <!-- chart js -->
+            <script src="/../js/chartjs/chart.min.js"></script>
+        
+        <!-- bootstrap progress js -->
+            <script src="/../js/progressbar/bootstrap-progressbar.min.js"></script>
+            <script src="/../js/nicescroll/jquery.nicescroll.min.js"></script>
+        
+        <!-- icheck -->
+            <script src="/../js/icheck/icheck.min.js"></script>
+        
+        <!-- gauge js -->
+            <script type="text/javascript" src="/../js/gauge/gauge.min.js"></script>
+            <script type="text/javascript" src="/../js/gauge/gauge_demo.js"></script>
+        
+        <!-- sparkline -->
+            <script src="/../js/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- custom -->
+            <script src="/../js/custom.js"></script>
+        
+        <!-- skycons (for weather widget)--> 
+            <script src="/../js/skycons/skycons.min.js"></script>
+
+        <!-- flot js -->
+            <script type="text/javascript" src="/../js/flot/jquery.flot.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.pie.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.orderBars.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.time.min.js"></script>
+            <script type="text/javascript" src="/../js/flot/date.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.spline.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.stack.js"></script>
+            <script type="text/javascript" src="/../js/flot/curvedLines.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.resize.js"></script>
+        
+        <!-- pace -->
+            <script src="/../js/pace/pace.min.js"></script>
+
+        <!--  -->
+
+        <!-- Datatables -->
+        <script src="/../js/datatables/js/jquery.dataTables.js"></script>
+        <script src="/../js/datatables/tools/js/dataTables.tableTools.js"></script>
+        
+        <!-- pace -->
+        <script src="/../js/pace/pace.min.js"></script>
+    
+      
+
+        
+
+        
+        <script>
+
+
+           
+    
+    function htmlDecode(input)
+    {
+      var e = document.createElement('div');
+      e.innerHTML = input;
+      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    var acquisitions_labels = JSON.parse(htmlDecode("<%= JSON.stringify(acquisitions_labels) %>")); 
+    var acquisitions_values = JSON.parse(htmlDecode("<%= JSON.stringify(acquisitions_values) %>"));
+    // PolarArea chart
+    var ctx = document.getElementById("polarArea");
+    var data = {
+      datasets: [{
+        data: acquisitions_values,
+        backgroundColor: [
+          "#455C73",
+          "#9B59B6"
+        ],
+        label: 'Acquisitions' // for legend
+      }],
+      labels: acquisitions_labels
+    };
+
+    var polarArea = new Chart(ctx, {
+      data: data,
+      type: 'polarArea',
+      options: {
+        scale: {
+          ticks: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+    <!-- JAVASCRIPT - ECHARTS -->
+        
+        <!-- echart -->
+        <script src="/../js/echart/echarts-all.js"></script>
+        <script src="/../js/echart/green.js"></script>
+
+    
+    <!-- /javascript - ECHARTS -->
+</body>
+
+</html>

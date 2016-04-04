@@ -1,0 +1,580 @@
+
+<!-- footer content -->
+                        <footer>
+                            <div class="">
+                                <p class="pull-right">
+                                    <span class="lead"> <i class="fa fa-users"></i> Startup Trends</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                    <!-- /footer content -->
+                </div>
+
+
+</div>
+    </div>
+
+    <!-- page end -->
+        <div id="custom_notifications" class="custom-notifications dsp_none">
+            <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+            </ul>
+            <div class="clearfix"></div>
+            <div id="notif-group" class="tabbed_notifications"></div>
+        </div>
+    <!-- /page end -->
+
+    <!-- JAVASCRIPTS -->
+        
+        <!-- bootstrap -->
+            <script src="/../js/bootstrap.min.js"></script>
+
+        <!-- chart js -->
+            <script src="/../js/chartjs/chart.min.js"></script>
+        
+        <!-- bootstrap progress js -->
+            <script src="/../js/progressbar/bootstrap-progressbar.min.js"></script>
+            <script src="/../js/nicescroll/jquery.nicescroll.min.js"></script>
+        
+        <!-- icheck -->
+            <script src="/../js/icheck/icheck.min.js"></script>
+        
+        <!-- gauge js -->
+            <script type="text/javascript" src="/../js/gauge/gauge.min.js"></script>
+            <script type="text/javascript" src="/../js/gauge/gauge_demo.js"></script>
+        
+        <!-- sparkline -->
+            <script src="/../js/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- custom -->
+            <script src="/../js/custom.js"></script>
+        
+        <!-- skycons (for weather widget)--> 
+            <script src="/../js/skycons/skycons.min.js"></script>
+
+        <!-- flot js -->
+            <script type="text/javascript" src="/../js/flot/jquery.flot.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.pie.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.orderBars.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.time.min.js"></script>
+            <script type="text/javascript" src="/../js/flot/date.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.spline.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.stack.js"></script>
+            <script type="text/javascript" src="/../js/flot/curvedLines.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.resize.js"></script>
+        
+        <!-- pace -->
+            <script src="/../js/pace/pace.min.js"></script>
+
+        <!--  -->
+            <script>
+                $('document').ready(function () {
+                    $(".sparkline_one").sparkline(JSON.parse(htmlDecode("<%= JSON.stringify(categories) %>")), {
+                        type: 'bar',
+                        height: '80',
+                        barWidth: 9,
+                        colorMap: {
+                            '7': '#a1a1a1'
+                        },
+                        barSpacing: 7,
+                        barColor: '#26B99A'
+                    });
+
+                    $(".sparkline_two").sparkline(JSON.parse(htmlDecode("<%= JSON.stringify(categories) %>")), {
+                        type: 'line',
+                        width: '200',
+                        height: '80',
+                        lineColor: '#26B99A',
+                        fillColor: 'rgba(223, 223, 223, 0.57)',
+                        lineWidth: 2,
+                        spotColor: '#26B99A',
+                        minSpotColor: '#26B99A'
+                    });
+
+                    $(".sparkline_pie").sparkline(JSON.parse(htmlDecode("<%= JSON.stringify(categories) %>")), {
+                        type: 'pie',
+                        width: '200',
+                        height: '80',
+                        sliceColors: ['#26B99A', '#ccc', '#75BCDD', '#D66DE2']
+                    });
+
+                    $(".sparkline_discreet").sparkline(JSON.parse(htmlDecode("<%= JSON.stringify(categories) %>")), {
+                        type: 'discrete',
+                        width: '200',
+                        height: '80',
+                        barWidth: 3,
+                        lineColor: '#26B99A',
+                    });
+
+                    $(".sparkline_area").sparkline(JSON.parse(htmlDecode("<%= JSON.stringify(graphdata) %>")), {
+                        type: 'line',
+                        lineColor: '#26B99A',
+                        fillColor: '#26B99A',
+                        spotColor: '#4578a0',
+                        minSpotColor: '#728fb2',
+                        maxSpotColor: '#6d93c4',
+                        highlightSpotColor: '#ef5179',
+                        highlightLineColor: '#8ba8bf',
+                        spotRadius: 2.5,
+                        width: '200',
+                        height: '80'
+                    });
+
+
+                    var doughnutData = [
+                        {
+                            value: 30,
+                            color: "#455C73"
+                        },
+                        {
+                            value: 30,
+                            color: "#9B59B6"
+                        },
+                        {
+                            value: 60,
+                            color: "#BDC3C7"
+                        },
+                        {
+                            value: 100,
+                            color: "#26B99A"
+                        },
+                        {
+                            value: 120,
+                            color: "#3498DB"
+                        }
+                ];
+                    var myDoughnut = new Chart(document.getElementById("canvas1").getContext("2d")).Doughnut(doughnutData);
+
+
+                })
+            </script>
+        <!--  -->
+
+        <!-- flot -->
+            <script>
+                //random data
+
+                function htmlDecode(input)
+                {
+                    var e = document.createElement('div');
+                    e.innerHTML = input;
+                    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+                }
+                var d1 = JSON.parse(htmlDecode("<%= JSON.stringify(graphdata) %>")); 
+                var chartColours = ['#96CA59', '#3F97EB', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];
+                
+                    var chartMinDate = 1960; //first day
+                    var chartMaxDate = 2020; //last day
+
+
+                //flot options
+                var options = {
+                        grid: {
+                            show: true,
+                            aboveData: true,
+                            color: "#3f3f3f",
+                            labelMargin: 10,
+                            axisMargin: 0,
+                            borderWidth: 0,
+                            borderColor: null,
+                            minBorderMargin: 5,
+                            clickable: true,
+                            hoverable: true,
+                            autoHighlight: true,
+                            mouseActiveRadius: 100
+                        },
+                        series: {
+                            lines: {
+                                show: true,
+                                fill: true,
+                                lineWidth: 2,
+                                steps: false
+                            },
+                            points: {
+                                show: true,
+                                radius: 4.5,
+                                symbol: "circle",
+                                lineWidth: 3.0
+                            }
+                        },
+                        legend: {
+                            position: "ne",
+                            margin: [0, -25],
+                            noColumns: 0,
+                            labelBoxBorderColor: null,
+                            labelFormatter: function (label, series) {
+                                // just add some space to labes
+                                return label + '&nbsp;&nbsp;';
+                            },
+                            width: 20,
+                            height: 1
+                        },
+                        colors: chartColours,
+                        shadowSize: 0,
+                        tooltip: true, //activate tooltip
+                        tooltipOpts: {
+                            content: "%s: %y.0",
+                            xDateFormat: "%d/%m",
+                            shifts: {
+                                x: -30,
+                                y: -50
+                            },
+                            defaultTheme: false
+                        },
+                        yaxis: {
+                            min: 0
+                        },
+                        xaxis: {
+                            min: chartMinDate,
+                            max: chartMaxDate
+                        }
+                    };
+                var plot = $.plot($("#placeholder3xx3"), [{
+                    label: "Investments",
+                    data: d1,
+                    lines: {
+                        fillColor: "rgba(150, 202, 89, 0.12)"
+                    }, //#96CA59 rgba(150, 202, 89, 0.42)
+                    points: {
+                        fillColor: "#fff"
+                    }
+                        }], options);
+            </script>
+        <!-- /flot -->
+       
+        <!-- datepicker -->
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    var cb = function (start, end, label) {
+                        console.log(start.toISOString(), end.toISOString(), label);
+                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                        //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
+                    }
+
+                    var optionSet1 = {
+                        startDate: moment().subtract(29, 'days'),
+                        endDate: moment(),
+                        minDate: '01/01/2012',
+                        maxDate: '12/31/2015',
+                        dateLimit: {
+                            days: 60
+                        },
+                        showDropdowns: true,
+                        showWeekNumbers: true,
+                        timePicker: false,
+                        timePickerIncrement: 1,
+                        timePicker12Hour: true,
+                        ranges: {
+                            'Today': [moment(), moment()],
+                            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                            'This Month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        },
+                        opens: 'left',
+                        buttonClasses: ['btn btn-default'],
+                        applyClass: 'btn-small btn-primary',
+                        cancelClass: 'btn-small',
+                        format: 'MM/DD/YYYY',
+                        separator: ' to ',
+                        locale: {
+                            applyLabel: 'Submit',
+                            cancelLabel: 'Clear',
+                            fromLabel: 'From',
+                            toLabel: 'To',
+                            customRangeLabel: 'Custom',
+                            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                            firstDay: 1
+                        }
+                    };
+                    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+                    $('#reportrange').daterangepicker(optionSet1, cb);
+                    $('#reportrange').on('show.daterangepicker', function () {
+                        console.log("show event fired");
+                    });
+                    $('#reportrange').on('hide.daterangepicker', function () {
+                        console.log("hide event fired");
+                    });
+                    $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                        console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+                    });
+                    $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                        console.log("cancel event fired");
+                    });
+                    $('#options1').click(function () {
+                        $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+                    });
+                    $('#options2').click(function () {
+                        $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+                    });
+                    $('#destroy').click(function () {
+                        $('#reportrange').data('daterangepicker').remove();
+                    });
+                });
+            </script>
+
+        <!-- moris js -->
+            <script src="/../js/moris/raphael-min.js"></script>
+            <script src="/../js/moris/morris.js"></script>
+            <script src="/../js/moris/example.js"></script>
+        
+        <!-- skycons -->
+            <script>
+                var icons = new Skycons({
+                        "color": "#73879C"
+                    }),
+                    list = [
+                        "clear-day", "clear-night", "partly-cloudy-day",
+                        "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                        "fog"
+                    ],
+                    i;
+
+                for (i = list.length; i--;)
+                    icons.set(list[i], list[i]);
+
+                icons.play();
+            </script>
+            <script>
+            
+                var opts = {
+                    lines: 12, // The number of lines to draw
+                    angle: 0, // The length of each line
+                    lineWidth: 0.4, // The line thickness
+                    pointer: {
+                        length: 0.75, // The radius of the inner circle
+                        strokeWidth: 0.042, // The rotation offset
+                        color: '#1D212A' // Fill color
+                    },
+                    limitMax: 'false', // If true, the pointer will not go past the end of the gauge
+                    colorStart: '#1ABC9C', // Colors
+                    colorStop: '#1ABC9C', // just experiment with them
+                    strokeColor: '#F0F3F3', // to see which ones work best for you
+                    generateGradient: true
+                };
+                var target = document.getElementById('foo2'); // your canvas element
+                var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+                gauge.maxValue = 5000; // set max gauge value
+                gauge.animationSpeed = 32; // set animation speed (32 is default value)
+                gauge.set(3200); // set actual value
+                gauge.setTextField(document.getElementById("gauge-text2"));
+            </script>
+    <!-- /JAVASCRIPTS -->
+
+    <!-- JAVASCRIPT - ECHARTS -->
+        
+        <!-- echart -->
+        <script src="/../js/echart/echarts-all.js"></script>
+        <script src="/../js/echart/green.js"></script>
+
+        <script>
+
+            var p_data = JSON.parse(htmlDecode("<%= JSON.stringify(piedata) %>"));
+            var p_ledgend = JSON.parse(htmlDecode("<%= JSON.stringify(pieledgend) %>")); 
+
+            var myChart = echarts.init(document.getElementById('echart_pie'), theme);
+            myChart.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    //orient: 'vertical',
+                    //x: 'left',
+                    x: 'center',
+                    y: 'bottom',
+                    data: p_ledgend
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        magicType: {
+                            show: true,
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    width: '50%',
+                                    funnelAlign: 'left',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                calculable: true,
+                series: [
+                    {
+                        name: 'Investment Types',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '48%'], //left,top
+                        data: p_data
+                    }
+                ]
+            });
+
+            var dataStyle = {
+                normal: {
+                    label: {
+                        show: true
+                    },
+                    labelLine: {
+                        show: true
+                    }
+                }
+            };
+            var placeHolderStyle = {
+                normal: {
+                    color: '#778899',
+                    label: {
+                        show: false
+                    },
+                    labelLine: {
+                        show: false
+                    }
+                },
+                emphasis: {
+                    color: '#006400'
+                }
+            };
+
+            var myChartx = echarts.init(document.getElementById('echart_mini_pie'), theme);
+            myChartx.setOption({
+                title: {
+                    text: 'Chart #2',
+                    subtext: 'From ExcelHome',
+                    sublink: 'http://e.weibo.com/1341556070/AhQXtjbqh',
+                    x: 'center',
+                    y: 'center',
+                    itemGap: 20,
+                    textStyle: {
+                        color: 'rgba(30,144,255,0.8)',
+                        fontFamily: '微软雅黑',
+                        fontSize: 35,
+                        fontWeight: 'bolder'
+                    }
+                },
+                tooltip: {
+                    show: true,
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 170, //document.getElementById('main').offsetWidth / 2,
+                    y: 45,
+                    itemGap: 12,
+                    data: ['68%Something #1', '29%Something #2', '3%Something #3']
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '1',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [105, 130],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 68,
+                                name: '68%Something #1'
+                                },
+                            {
+                                value: 32,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                                }
+                            ]
+                        },
+                    {
+                        name: '2',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [80, 105],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 29,
+                                name: '29%Something #2'
+                                },
+                            {
+                                value: 71,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                                }
+                            ]
+                        },
+                    {
+                        name: '3',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [25, 80],
+                        itemStyle: dataStyle,
+                        data: [
+                            {
+                                value: 3,
+                                name: '3%Something #3'
+                                },
+                            {
+                                value: 97,
+                                name: 'invisible',
+                                itemStyle: placeHolderStyle
+                                }
+                            ]
+                        }
+                    ]
+            });
+        </script>
+
+         <!-- pace -->
+            <script src="/../js/pace/pace.min.js"></script>
+
+        <!--  -->
+
+        <!-- Datatables -->
+        <script src="js/datatables/js/jquery.dataTables.js"></script>
+        <script src="js/datatables/tools/js/dataTables.tableTools.js"></script>
+        
+        <!-- pace -->
+        <script src="js/pace/pace.min.js"></script>
+    
+      
+
+        <!-- Datatables -->
+        <script src="js/datatables/js/jquery.dataTables.js"></script>
+        <script src="js/datatables/tools/js/dataTables.tableTools.js"></script>
+        
+        <!-- pace -->
+        <script src="js/pace/pace.min.js"></script>
+
+        
+    <!-- /javascript - ECHARTS -->
+</body>
+
+</html>

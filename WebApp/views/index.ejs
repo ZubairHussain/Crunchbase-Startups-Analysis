@@ -1,0 +1,143 @@
+<%- include layouts/header.ejs %>
+<!-- page content -->
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="row top_tiles" style="margin: 10px 0;">
+                            <div class="col-md-3 col-sm-3 col-xs-6 tile">
+                                <h5>Investments by Country</h5>
+                                <span class="sparkline_pie" style="height: 160px;">
+                                    <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                                </span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 tile">
+                                <h5>Total Acquisitions</h5>
+                                <span class="sparkline_two" style="height: 160px;">
+                                    <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                                </span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 tile">
+                                <h5>Funding per Years</h5>
+                                <span class="sparkline_area" style="height: 160px;">
+                                    <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                                </span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-6 tile">
+                                <h5>Investments by Company's Category</h5>
+                                <span class="sparkline_one" style="height: 160px;">
+                                    <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                                </span>
+                            </div>
+                        </div>
+                        <br />
+
+                        
+                        <div class="row">
+                                <!-- start of application device ranking -->
+                                    <div class="col-md-4 col-sm-4 col-xs-12" style="overflow-x:auto; height:400px; width:50%">
+                                        <div class="x_panel tile fixed_height_450" >
+                                            <div class="x_title">
+                                                <h2>Investments<small>(by Country)</small></h2>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+
+                                                 <table class="" style="width:50%">
+                                                    <tr>
+                                                        <th align="centre" >
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                <p class=""><h4>Country</h4></p>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                <p class=""><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Contribution) </h4></p>
+                                                            </div>
+
+                                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                                <p class=""><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Percentage </h4></p>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </table>
+                                                <hr>
+
+                                                <% if(Countries.length){ 
+                                                    for(var i = 0;i < Countries.length; i++) { %>
+                                                        <div class="widget_summary">
+                                                            <div class="w_left w_25">
+                                                                <span><%= Countries[i] %></span>
+                                                            </div>
+                                                            <div class="w_center w_55" >
+                                                                <div class="progress" >
+                                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow= "" aria-valuemin="0" aria-valuemax="100" style="width: <%= Contributions[i] %>%;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="w_right w_20">
+                                                                <span><%= Contributions[i] %>%</span>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    <% }
+
+                                                } else { %>
+                                                    <div class="widget_summary">
+                                                        <div class="">
+                                                            <span>No data</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- start of application device ranking -->
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="x_panel" style="width:150%; height: 400px">
+                                            <div class="x_title">
+                                                <h2>Investment Types Contribution</h2>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div id="echart_pie" style="height:350px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- end of application device ranking -->
+                            </div>
+                            
+                            
+                            <div class="row">
+                                <!-- start of network activities -->
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="dashboard_graph x_panel">
+                                            <div class="row x_title">
+                                                <div class="col-md-6">
+                                                    <h2>Investments per Year    <small>Future Investment Predictions</small></h2>
+                                                </div>
+                                            </div>
+                                            <div class="x_content">
+                                                <div class="demo-container" style="height:250px;width:100%;">
+                                                    <% if(graphdata.length) { %>
+                                                        <div id="placeholder3xx3" class="demo-placeholder" style="width: 100%; height:250px;"></div>
+                                                    <% } else { %>
+                                                        <div style="width: 100%; height:250px;">
+                                                            <p>
+                                                            <h4>No data found</h4>
+                                                            </p>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- end of network activities -->
+                            </div>
+
+                            </div>
+                            </div>
+                        
+
+                    </div>
+                    </div>
+
+            <!-- /page content -->
+<%- include layouts/footer_index.ejs %>

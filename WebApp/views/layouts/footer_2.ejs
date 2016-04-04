@@ -1,0 +1,230 @@
+
+<!-- footer content -->
+                        <footer>
+                            <div class="">
+                                <p class="pull-right">
+                                    <span class="lead"> <i class="fa fa-users"></i> Startup Trends</span>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </footer>
+                    <!-- /footer content -->
+                </div>
+
+
+</div>
+    </div>
+
+    <!-- page end -->
+        <div id="custom_notifications" class="custom-notifications dsp_none">
+            <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+            </ul>
+            <div class="clearfix"></div>
+            <div id="notif-group" class="tabbed_notifications"></div>
+        </div>
+    <!-- /page end -->
+
+    <!-- JAVASCRIPTS -->
+        
+        <!-- bootstrap -->
+            <script src="/../js/bootstrap.min.js"></script>
+
+        <!-- chart js -->
+            <script src="/../js/chartjs/chart.min.js"></script>
+        
+        <!-- bootstrap progress js -->
+            <script src="/../js/progressbar/bootstrap-progressbar.min.js"></script>
+            <script src="/../js/nicescroll/jquery.nicescroll.min.js"></script>
+        
+        <!-- icheck -->
+            <script src="/../js/icheck/icheck.min.js"></script>
+        
+        <!-- gauge js -->
+            <script type="text/javascript" src="/../js/gauge/gauge.min.js"></script>
+            <script type="text/javascript" src="/../js/gauge/gauge_demo.js"></script>
+        
+        <!-- sparkline -->
+            <script src="/../js/sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- custom -->
+            <script src="/../js/custom.js"></script>
+        
+        <!-- skycons (for weather widget)--> 
+            <script src="/../js/skycons/skycons.min.js"></script>
+
+        <!-- flot js -->
+            <script type="text/javascript" src="/../js/flot/jquery.flot.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.pie.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.orderBars.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.time.min.js"></script>
+            <script type="text/javascript" src="/../js/flot/date.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.spline.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.stack.js"></script>
+            <script type="text/javascript" src="/../js/flot/curvedLines.js"></script>
+            <script type="text/javascript" src="/../js/flot/jquery.flot.resize.js"></script>
+        
+        <!-- pace -->
+            <script src="/../js/pace/pace.min.js"></script>
+
+        <!--  -->
+
+        <!-- Datatables -->
+        <script src="/../js/datatables/js/jquery.dataTables.js"></script>
+        <script src="/../js/datatables/tools/js/dataTables.tableTools.js"></script>
+        
+        <!-- pace -->
+        <script src="/../js/pace/pace.min.js"></script>
+    
+      
+
+        
+
+        
+        <script>
+
+
+           
+    // Line chart
+    var ctx = document.getElementById("lineChart"); 
+
+    function htmlDecode(input)
+    {
+      var e = document.createElement('div');
+      e.innerHTML = input;
+      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+    var _okeys = JSON.parse(htmlDecode("<%= JSON.stringify(keys) %>")); 
+    var _ovalues = JSON.parse(htmlDecode("<%= JSON.stringify(values) %>")); 
+
+    var country_labels = JSON.parse(htmlDecode("<%= JSON.stringify(country_labels) %>")); 
+    var country_funds = JSON.parse(htmlDecode("<%= JSON.stringify(country_funds) %>")); 
+
+    var type_labels = JSON.parse(htmlDecode("<%= JSON.stringify(type_names) %>")); 
+    var type_funds = JSON.parse(htmlDecode("<%= JSON.stringify(type_values) %>")); 
+
+    var investors_labels = JSON.parse(htmlDecode("<%= JSON.stringify(investors_names) %>")); 
+    var investors_funds = JSON.parse(htmlDecode("<%= JSON.stringify(investors_values) %>")); 
+
+    var lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: _okeys,
+        datasets: [{
+          label: "Investments",
+          backgroundColor: "rgba(38, 185, 154, 0.31)",
+          borderColor: "rgba(38, 185, 154, 0.7)",
+          pointBorderColor: "rgba(38, 185, 154, 0.7)",
+          pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointBorderWidth: 1,
+          data: _ovalues
+        }]
+      },
+    });
+
+    // Bar chart
+    var ctx = document.getElementById("mybarChart");
+    var mybarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: country_labels,
+        datasets: [{
+          label: 'Investments',
+          backgroundColor: "#26B99A",
+          data: country_funds
+        }]
+      },
+
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    // Doughnut chart
+    var ctx = document.getElementById("canvasDoughnut");
+    var data = {
+      labels: investors_labels,
+      datasets: [{
+        data: investors_funds,
+        backgroundColor: [
+          "#455C73",
+          "#9B59B6",
+          "#BDC3C7",
+          "#26B99A",
+          "#3498DB",
+          "#3498DB",
+          "#4C787E",
+          "#6CC417",
+          "#493D26",
+          "#008000"
+        ],
+        hoverBackgroundColor: [
+          "#34495E",
+          "#B370CF",
+          "#CFD4D8",
+          "#36CAAB",
+          "#49A9EA"
+        ]
+
+      }]
+    };
+
+    var canvasDoughnut = new Chart(ctx, {
+      type: 'doughnut',
+      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+      data: data
+    });
+    
+
+    // Pie chart
+    var ctx = document.getElementById("pieChart");
+    
+    var data = {
+      datasets: [{
+        data: type_funds,
+        backgroundColor: [
+          "#D1D0CE",
+          "#9B59B6",
+          "#BDC3C7",
+          "#26B99A",
+          "#3498DB",
+          "#4C787E",
+          "#6CC417",
+          "#493D26",
+          "#008000"
+        ],
+        label: 'My dataset' // for legend
+      }],
+      labels: ['venture','angel','crowdfunding','other','post-ipo','private-equity','series-a','series-b','series-c+']
+    };
+
+    var pieChart = new Chart(ctx, {
+      data: data,
+      type: 'pie',
+      otpions: {
+        legend: false
+      }
+    });
+
+    
+    
+  </script>
+
+    <!-- JAVASCRIPT - ECHARTS -->
+        
+        <!-- echart -->
+        <script src="/../js/echart/echarts-all.js"></script>
+        <script src="/../js/echart/green.js"></script>
+
+    
+    <!-- /javascript - ECHARTS -->
+</body>
+
+</html>
