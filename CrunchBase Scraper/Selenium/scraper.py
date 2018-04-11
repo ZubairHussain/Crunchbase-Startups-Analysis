@@ -11,7 +11,7 @@ city = driver.find_element_by_id('city')
 
 first_name.send_keys('Zubair')
 last_name.send_keys('Hussain')
-email.send_keys('zubairhussain918@hotmail.com')
+email.send_keys('abc@hotmail.com')
 city.send_keys('islamabad')
 
 driver.find_element_by_class_name('btn-lg').click()
